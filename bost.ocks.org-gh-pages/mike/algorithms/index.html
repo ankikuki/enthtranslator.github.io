@@ -313,15 +313,15 @@ function minHeap(compare) {
 
 <h2><a href="#sampling" name="sampling">#</a>Sampling</h2>
 
-<p>Before I can explain the first algorithm, I first need to explain the problem it addresses.
+<p>Перед тем, как я смогу рассказать о первом алгоритме, мне нужно рассказать о проблеме, с которой он связан.
 
 <p style="height:360px;width:100%;overflow:hidden;"><img src="starry-night-detail.jpg" style="width:960px;">
 
-<aside>Van Gogh’s <i><a href="http://en.wikipedia.org/wiki/The_Starry_Night">The Starry Night</a></i></aside>
+<aside>Ван Гог<i><a href="http://en.wikipedia.org/wiki/The_Starry_Night">Звездная ночь</a></i></aside>
 
-<p>Light — electromagnetic radiation — the light emanating from this screen, traveling through the air, focused by your lens and projected onto the retina — is a continuous signal. To be perceived, we must reduce light to discrete impulses by measuring its intensity and frequency distribution at different points in space.
+<p>Свет - это электромагнитное излучение. Он льется из экрана, движется через воздух, фокусируется хрусталиком вашего глаза и проецируется на сетчатку. Это непрерывный сигнал. Для работы с ним нам нужно редуцировать свет к потоку дискретных имульсов, измеряя его интенсивность и частоту в различных точках пространства.
 
-<p>This reduction process is called <i>sampling</i>, and it is essential to vision. You can think of it as a painter applying discrete strokes of color to form an image (particularly in <a href="http://en.wikipedia.org/wiki/Pointillism">Pointillism</a> or <a href="http://en.wikipedia.org/wiki/Divisionism">Divisionism</a>). Sampling is further a core concern of computer graphics; for example, to rasterize a 3D scene by raytracing, we must determine where to shoot rays. Even resizing an image requires sampling.
+<p>Такой процесс редукции называется <i>sampling</i>, and it is essential to vision. You can think of it as a painter applying discrete strokes of color to form an image (particularly in <a href="http://en.wikipedia.org/wiki/Pointillism">Pointillism</a> or <a href="http://en.wikipedia.org/wiki/Divisionism">Divisionism</a>). Sampling is further a core concern of computer graphics; for example, to rasterize a 3D scene by raytracing, we must determine where to shoot rays. Even resizing an image requires sampling.
 
 <p>Sampling is made difficult by competing goals. On the one hand, samples should be evenly distributed so there are no gaps. But we must also avoid repeating, regular patterns, which cause <a href="http://en.wikipedia.org/wiki/Aliasing">aliasing</a>. This is why you shouldn’t wear a finely-striped shirt on camera: the stripes resonate with the grid of pixels in the camera’s sensor and cause <a href="http://en.wikipedia.org/wiki/Moiré_pattern">Moiré patterns</a>.
 
