@@ -2253,11 +2253,11 @@ function mergesort(array) {
 
 <h2><a href="#maze-generation" name="maze-generation">#</a>Генерация лабиринтов</h2>
 
-<p>The last problem we’ll look at is maze generation. All algorithms in this section generate a <a href="http://en.wikipedia.org/wiki/Spanning_tree">spanning tree</a> of a two-dimensional rectangular grid. This means there are no loops and there is a unique path from the root in the bottom-left corner to every other cell in the maze.
+<p>Последнее, на что мы посмотрим - генерация лабиринтов. Все алгоритмы этой секции генерируют <a href="http://en.wikipedia.org/wiki/Spanning_tree">остовное дерево</a> двумерной прямоугольной сетки. Это значит, что нет циклов, и до каждой клетки лабиринта существует уникальный путь от корня (нижней левой клетки).
 
 <p>I apologize for the esoteric subject — I don’t know enough to say why these algorithms are useful beyond simple games, and possibly something about electrical networks. But even so, they are fascinating from a visualization perspective because they solve the same, highly-constrained problem in wildly-different ways.
 
-<p>And they’re just fun to watch.
+<p>И на них просто забавно смотреть.
 
 <style>
 
@@ -2386,11 +2386,11 @@ function popRandom(array) {
 
 <aside><a href="http://bl.ocks.org/mbostock/70a28267db0354261476">Random traversal</a></aside>
 
-<p>The random traversal algorithm initializes the first cell of the maze in the bottom-left corner. The algorithm then tracks all possible ways by which the maze could be extended (shown in red). At each step, one of these possible extensions is picked randomly, and the maze is extended as long as this does not reconnect it with another part of the maze.
+<p>Случайный алгоритм обхода ставит первую клетку лабиринта в левый нижний угол. Затем он строит все возможные пути, куда можно расширить лабиринт (крассные клетки). На каждом шаге случайно выбирается один из таких путей, и лабиринт расширяется, если он не соединяется с другой частью.
 
-<p>Like Bridon’s Poisson-disc sampling algorithm, random traversal maintains a frontier and randomly selects from that frontier to expand. Both algorithms thus appear to grow organically, like a fungus.
+<p>Также как и Bridon’s Poisson-disc sampling algorithm, случайный обход поддерживает границу и случайно выбирает, куда от нее расширяться. Так поведения обоих алгоритмов похоже на рост корневой системы деревьев.
 
-<p>Randomized depth-first traversal follows a very different pattern:
+<p>Рандомизированный обход в глубину следует совершенно другим законам:
 
 <p id="randomized-depth-first-traversal" class="animation maze"><script>(function() {
 
