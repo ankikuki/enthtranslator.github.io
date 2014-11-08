@@ -3658,29 +3658,30 @@ function generateMaze(width, height) {
 
 <p>Both trees have the same number of nodes (3,239) and are scaled to fit in the same area (960×500 pixels). This hides an important difference: at this size, randomized depth-first traversal typically produces a tree two-to-five times deeper than Wilson’s algorithm. The tree depths above are <span id="wilsons-tree-depth">_</span> and <span id="randomized-depth-first-tree-depth">_</span>, respectively. In the larger 480,000-node mazes used for color flooding, randomized depth-first traversal produces a tree that is 10-20 times deeper!
 
-<h2><a href="#vision" name="vision">#</a>Using Vision to Think</h2>
+<h2><a href="#vision" name="vision">#</a>Использование зрения для мышления</h2>
 
-<p>This essay has focused on algorithms. Yet the techniques discussed here apply to a broader space of problems: mathematical formulas, dynamical systems, processes, <i>etc.</i> Basically, anywhere there is code that needs understanding.
+<p>Эта статья была сфокусирована на алгоритмах. Однако приёмы, описанные здесь, применимы и для более широкого круга проблем: математические формулы, динамические системы, процессы, и т.д. В принципе они применимы везде, где есть код, который нуждается в понимании.
 
-<p><a href="http://shancarter.com/">Shan Carter</a>, <a href="https://twitter.com/archietse">Archie Tse</a> and I recently built a new <a href="http://www.nytimes.com/interactive/2014/upshot/buy-rent-calculator.html">rent <i>vs.</i> buy calculator</a>; powering the calculator is a couple hundred lines of code to compute the total cost of renting or buying a home. It’s a simplistic model, but more complicated than fits in your head. The calculator takes about twenty input parameters (such as purchase price and mortgage rate) and considers opportunity costs on investments, inflation, marginal tax rates, and a variety of other factors.
+<p><a href="http://shancarter.com/">Shan Carter</a>, <a href="https://twitter.com/archietse">Archie Tse</a> и я недавно написали новый <a href="http://www.nytimes.com/interactive/2014/upshot/buy-rent-calculator.html">калькулятор аренды против стоимости</a>; он состоит из пары сотен строк кода для вычисления итоговой стоимости аренды или покупки жилья. Это упрощённая модель, но сложнее, чем умещается в голове. Калькулятор берёт около двадцати входных параметров (таких как цена покупки и ипотечная ставка) и считает возможные издержки на инвестиции, инфляцию, предельные налоговые ставки и другие факторы.
 
-<p>The goal of the calculator is to help you decide whether you should buy or rent a home. If the total cost of buying is cheaper, you should buy. Otherwise, you should rent.
 
-<p>Except, it’s not that simple.
+<p>Цель калькулятора в том, чтобы помочь Вам решить, что ли Вы должны делать: арендовать или покупать дом. Если итоговая стоимость покупки меньше, то Вы должны купить дом. Иначе Вы должны арендовать.
 
-<p>To output an accurate answer, the calculator needs accurate inputs. While some inputs are well-known (such as the length of your mortgage), others are difficult or impossible to predict. No one can say exactly how the stock market will perform, how much a <i>specific</i> home will appreciate or depreciate, or how the renting market will change over time.
+<p>Остальное не так просто.
 
-<a href="http://www.nytimes.com/interactive/2014/upshot/buy-rent-calculator.html" style="display:inline-block;position:relative;left:240px;float:right;text-align:right;font-family:'PT Sans',sans-serif;font-size:small;margin:20px 0 20px -220px;"><img src="buy-vs-rent.gif" style="border:solid 1px #ccc;background:#fff;padding:10px 10px 0 10px;width:375px;height:300px;"><br>Is It Better to Buy or Rent?</a>
+<p>Чтобы вывести точный ответ, калькулятору требуются точные входные данные. В то время, как некоторые входные данные хорошо известны (такие как время, на которое берётся ипотека), другие данные сложно или невозможно предсказать. Никто не может точно сказать как будет вести себя фондовый рынок, на сколько <i>определённый</i> дом подорожает или обесценится, или как рынок аренды изменится с течением времени.
 
-<p>We can make educated guesses at each variable — for example, looking at <a href="http://www.nytimes.com/interactive/2014/01/23/business/case-shiller-slider.html">Case–Shiller data</a>. But if the calculator is a black box, then readers can’t see how sensitive their answer is to small changes.
+<a href="http://www.nytimes.com/interactive/2014/upshot/buy-rent-calculator.html" style="display:inline-block;position:relative;left:240px;float:right;text-align:right;font-family:'PT Sans',sans-serif;font-size:small;margin:20px 0 20px -220px;"><img src="buy-vs-rent.gif" style="border:solid 1px #ccc;background:#fff;padding:10px 10px 0 10px;width:375px;height:300px;"><br>Что лучше - купить или арендовать?</a>
 
-<p>To fix this, we need to do more than output a single number. We need to show <i>how the underlying system works</i>. The new calculator therefore charts every variable and lets you quickly explore any variable’s effect by adjusting the associated slider.
+<p>Мы можем сделать обоснованные предположения по каждой переменной - например, глядя на <a href="http://www.nytimes.com/interactive/2014/01/23/business/case-shiller-slider.html">информацию по индексу Кейса-Шиллера</a>. Но если калькулятор - это чёрный ящик, тогда пользователи не смогут увидеть, насколько чувствителен ответ калькулятора к малым изменениям входных данных.
 
-<p>The slope of the chart shows the associated variable’s importance: the greater the slope, the more the decision depends on that variable. Since variables interact with each other, changing a variable may change the slope of other charts.
+<p>Чтобы исправить это, мы должны сделать больше, чем просто выдавать одно число на выход. Мы должны показать, <i>как работает система изнутри</i>. Новый калькулятор строит диаграмму для каждой переменной и позволяет Вам быстро исследовать эффект от изменения любой переменной, регулируя ползунок, связанный с ней.
 
-<p>This design lets you inspect many aspects of the system. For example, should you make a large down payment? Yes, if the down payment rate slopes down; or no, if the down payment rate slopes up, as with a higher investment return rate. This suggests that the optimal loan size depends on the difference between the opportunity cost on the down payment (money not invested) and the interest cost on the mortgage.
+<p>Наклон диаграммы показывает значимость связанной переменной: чем больше наклон, тем больше решение зависит от этой переменной.  Поскольку переменные взаимодействуют друг с другом, изменение одной переменной может изменить наклон остальных диаграмм.
 
-<p>So, why visualize algorithms? Why visualize anything? To leverage the human visual system to improve understanding. Or more simply, to <a href="http://books.google.com/books/about/Readings_in_Information_Visualization.html?id=wdh2gqWfQmgC">use vision to think</a>.
+<p>Такой дизайн позволяет Вам изучить много аспектов системы. Например, должны ли вы сделать большой первоначальный взнос? Да, если диаграмма ставки первоначального взноса наклонена вниз; или нет, если диаграмма растёт, показывая больший инвестиционный доход. Это говорит о том, что оптимальный размер кредита зависит от разницы между ценой первоначального взноса (деньги не вкладываются) и затратами на выплату процентов по ипотеке.
+
+<p>Так зачем же визализировать алгоритмы? Зачем вообще что-то визуализировать? Для того, чтобы использовать зрительную систему человека для повышения понимания. Или более просто - <a href="http://books.google.com/books/about/Readings_in_Information_Visualization.html?id=wdh2gqWfQmgC">использовать зрение для мышления</a>.
 
 <h2><a href="#related-work" name="related-work">#</a>Related Work</h2>
 
