@@ -1055,11 +1055,11 @@ d3.selectAll(".starry-night")
 
 })()</script>
 
-<h2><a href="#shuffling" name="shuffling">#</a>Shuffling</h2>
+<h2><a href="#shuffling" name="shuffling">#</a>Перемешивание</h2>
 
-<p>Shuffling is the process of rearranging an array of elements randomly. For example, you might shuffle a deck of cards before dealing a poker game. A good shuffling algorithm is unbiased, where every ordering is equally likely.
+<p>Перемешивание (тасование) – это процесс перестановки элементов массива случайным образом. Например, вы можете перемешать колоду карт перед игрой в покер. Хороший алгоритм перемешивания беспристрастен, каждая перестановка равновероятна.
 
-<p>The Fisher–Yates shuffle is an optimal shuffling algorithm. Not only is it unbiased, but it runs in linear time, uses constant space, and is easy to implement.
+<p>Алгоритм перетасовки Fisher–Yates является оптимальным алгоритмом перемешивания. Не только потому, что он беспристрастен, но и потому, что он работает линейное время, использует постоянное пространство и его легко реализовать.
 
 <pre><code class="javascript">function shuffle(array) {
   var n = array.length, t, i;
@@ -1072,7 +1072,7 @@ d3.selectAll(".starry-night")
   return array;
 }</code></pre>
 
-<p>Above is the code, and below is a visual explanation:
+<p>Выше представлен код, и ниже его визуальное представление:
 
 <style>
 
@@ -1196,15 +1196,16 @@ function shuffle(array) {
 
 })()</script>
 
-<aside>For a more detailed explanation of this algorithm, see my post on the <a href="http://bost.ocks.org/mike/shuffle/">Fisher–Yates shuffle</a>.</aside>
+<aside>Для более подробного объяснения этого алгоритма смотрите мою запись <a href="http://bost.ocks.org/mike/shuffle/">Перемешивание Fisher–Yates</a>.</aside>
 
-<p>Each line represents a number. Small numbers lean left and large numbers lean right. (Note that you can shuffle an array of anything — not just numbers — but this visual encoding is useful for showing the order of elements. It is inspired by <a href="http://www.cs.princeton.edu/~rs/">Robert Sedgwick</a>’s sorting visualizations in <i>Algorithms in C</i>.)
+<p>Каждая линия представляет собой число. Небольшие числа наклонены влево, а большие наклонены вправо. (Учтите, что вы можете перемешивать массив чего угодно – не только чисел – но это визуальное представление самое пригодное для показа порядка элементов.
+В его основе лежит визуализация сортировки <a href="http://www.cs.princeton.edu/~rs/">Роберта Седжвика</a> в <i>Алгоритмы в С</i>.)
 
-<p>The algorithm splits the array into two parts: the right side of the array (in black) is the shuffled section, while the left side of the array (in gray) contains elements remaining to be shuffled. At each step it picks a random element from the left and moves it to the right, thereby expanding the shuffled section by one. The original order on the left does not need to be preserved, so to make room for the new element in the shuffled section, the algorithm can simply swap the element into place. Eventually all elements are shuffled, and the algorithm terminates.
+<p>Алгоритм делит массив на две части: правая часть массива (черная) уже перемешанная секция, в то время как левая часть массива (серая) содержит элементы, которые нужно перемешать. На каждом шаге он выбирает случайный элемент из левой части и перемещает его вправо, тем самым расширяя перемешанную секцию на один элемент. Оригинальный порядок в левой части не должен быть сохранен, поэтому чтобы освободить место для нового элемента в перетасованной секции алгоритм может просто поменять место элемента. В конце концов все элементы расположены в случайном порядке и алгоритм завершается.
 
-<p>If Fisher–Yates is a good algorithm, what does a bad algorithm look like? Here’s one:
+<p>Если алгоритм Fisher–Yates является хорошим, как выглядит плохой алгоритм? Например, вот один:
 
-<pre><code class="javascript">// DON’T DO THIS!
+<pre><code class="javascript">// НЕ ДЕЛАЙТЕ ЭТОГО!
 function shuffle(array) {
   return array.sort(function(a, b) {
     return Math.random() - .5; // ಠ_ಠ
