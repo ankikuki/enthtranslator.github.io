@@ -1055,11 +1055,11 @@ d3.selectAll(".starry-night")
 
 })()</script>
 
-<h2><a href="#shuffling" name="shuffling">#</a>Перемешивание</h2>
+<h2><a href="#shuffling" name="shuffling">#</a>Тасование</h2>
 
-<p>Перемешивание (тасование) – это процесс перестановки элементов массива случайным образом. Например, вы можете перемешать колоду карт перед игрой в покер. Хороший алгоритм перемешивания беспристрастен, каждая перестановка равновероятна.
+<p>Тасование (перемешивание) – это процесс перестановки элементов массива случайным образом. Например, вы можете перемешать колоду карт перед игрой в покер. Хороший алгоритм перемешивания беспристрастен, каждая перестановка равновероятна.
 
-<p>Алгоритм перетасовки Fisher–Yates является оптимальным алгоритмом перемешивания. Не только потому, что он беспристрастен, но и потому, что он работает линейное время, использует постоянное пространство и его легко реализовать.
+<p>Алгоритм перетасовки Фишера–Йетса является оптимальным алгоритмом перемешивания. Не только потому, что он беспристрастен, но и потому, что он работает линейное время, использует постоянное пространство и его легко реализовать.
 
 <pre><code class="javascript">function shuffle(array) {
   var n = array.length, t, i;
@@ -1196,14 +1196,14 @@ function shuffle(array) {
 
 })()</script>
 
-<aside>Для более подробного объяснения этого алгоритма смотрите мою запись <a href="http://bost.ocks.org/mike/shuffle/">Перемешивание Fisher–Yates</a>.</aside>
+<aside>Для более подробного объяснения этого алгоритма смотрите мою запись <a href="http://bost.ocks.org/mike/shuffle/">Тасование Фишера–Йетса</a>.</aside>
 
 <p>Каждая линия представляет собой число. Небольшие числа наклонены влево, а большие наклонены вправо. (Учтите, что вы можете перемешивать массив чего угодно – не только чисел – но это визуальное представление самое пригодное для показа порядка элементов.
 В его основе лежит визуализация сортировки <a href="http://www.cs.princeton.edu/~rs/">Роберта Седжвика</a> в <i>Алгоритмы в С</i>.)
 
 <p>Алгоритм делит массив на две части: правая часть массива (черная) уже перемешанная секция, в то время как левая часть массива (серая) содержит элементы, которые нужно перемешать. На каждом шаге он выбирает случайный элемент из левой части и перемещает его вправо, тем самым расширяя перемешанную секцию на один элемент. Оригинальный порядок в левой части не должен быть сохранен, поэтому чтобы освободить место для нового элемента в перетасованной секции алгоритм может просто поменять место элемента. В конце концов все элементы расположены в случайном порядке и алгоритм завершается.
 
-<p>Если алгоритм Fisher–Yates является хорошим, как выглядит плохой алгоритм? Например, вот один:
+<p>Если алгоритм Фишера–Йетса является хорошим, как выглядит плохой алгоритм? Например, вот один:
 
 <pre><code class="javascript">// НЕ ДЕЛАЙТЕ ЭТОГО!
 function shuffle(array) {
@@ -1212,15 +1212,15 @@ function shuffle(array) {
   });
 }</code></pre>
 
-<p>This approach uses sorting to shuffle by specifying a random comparator function. A comparator defines the order of elements. It takes arguments <i>a</i> and <i>b</i> — two elements from the array to compare — and returns a value less than zero if <i>a</i> is less than <i>b</i>, a value greater than zero if <i>a</i> is greater than <i>b</i>, or zero if <i>a</i> and <i>b</i> are equal. The comparator is invoked repeatedly during sorting.
+<p>Этот подход использует сортировку для перемешивания с указанием случайной функции компаратора. Компаратор определяет порядок элементов. Он принимает аргументы <i>a</i> и <i>b</i> – два элемента из массива для сравнения – и возвращает значение меньше нуля, если <i>a</i> меньше <i>b</i>, значение больше нуля если <i>a</i> больше <i>b</i>, или ноль если <i>a</i> и <i>b</i> равны. Компаратор вызывается неоднократно во время сортировки.
 
-<aside>If you don’t specify a comparator to array.sort, elements are ordered <a href="http://en.wikipedia.org/wiki/Lexicographical_order">lexicographically</a>.</aside>
+<aside>Если вы не укажете компаратор для array.sort, элементы будут упорядочены <a href="http://en.wikipedia.org/wiki/Lexicographical_order">лексикографически</a>.</aside>
 
-<p>Here the comparator returns a random number between -.5 and +.5. The assumption is that this defines a random order, so sorting will jumble the elements randomly and perform a good shuffle.
+<p>В данном случае компаратор возвращает случайное число между -.5 и +.5. Предполагается, что это определяет случайный порядок, таким образом сортировка будет перемешивать элементы случайным образом и выполнит хорошее тасование.
 
-<p>Unfortunately, this assumption is flawed. A random pairwise order (for any two elements) does not establish a random order for a set of elements. A comparator must obey <i>transitivity</i>: if <i>a</i> > <i>b</i> and <i>b</i> > <i>c</i>, then <i>a</i> > <i>c</i>. But the random comparator returns a random value, violating transitivity and causing the behavior of array.sort to be undefined! You might get lucky, or you might not.
+<p>К сожалению, это предположение является ошибочным. Случайный парный порядок (для любых двух элементов) не устанавливает случайный порядок для набора элементов. Компаратор должен подчиняться <i>транзитивности</i>: если <i>a</i> > <i>b</i> и <i>b</i> > <i>c</i>, то <i>a</i> > <i>c</i>. Но случайный компаратор возвращает случайное значение тем самым нарушая транзитивность и поэтому поведение array.sort не определено. Вам может повезти, а может и нет.
 
-<p>How bad is it? We can try to answer this question by visualizing the output:
+<p>Насколько это плохо? Мы можем попытаться ответить на этот вопрос визуализируя вывод:
 
 <p id="random-comparator-shuffle" class="animation shuffle" style="-webkit-user-select:none;"><script>(function() {
 
@@ -1285,15 +1285,15 @@ function shuffle(array) {
 
 })()</script>
 
-<aside>Another reason this algorithm is bad is that sorting takes <i>O(n lg n)</i> time, making it significantly slower than Fisher–Yates which takes <i>O(n)</i>. But speed is less damning than bias.</aside>
+<aside>Еще одна причина, которая делает этот алгоритм плохим - сортировка занимает <i>O(n lg n)</i>, что делает его значительно медленнее, чем Фишер–Йетс, который занимает <i>O(n)</i>. Но скорость менее убийственна чем предвзятость.</aside>
 
-<p>This may look random, so you might be tempted to conclude that random comparator shuffle is adequate, and dismiss concerns of bias as pedantic. But looks can be misleading! There are many things that appear random to the human eye but are substantially non-random.
+<p>Это может выглядеть случайным, поэтому может возникнуть соблазн сделать вывод, что тасование случайного компаратора является адекватным, и избавиться от в предвзятости. Но внешность может ввести в заблуждение! Есть много вещей, которые кажутся случайными для человеческого глаза, но по существу такими не являются.
 
-<p>This deception demonstrates that visualization is not a magic wand. Showing a single run of the algorithm does not effectively assess the quality of its randomness. We must instead carefully design a visualization that addresses the specific question at hand: what is the algorithm’s bias?
+<p>Этот обман показывает, что визуализация не является волшебной палочкой. Визуализация одного прохода алгоритма не дает возможность эффективно оценивать качество случайности. Вместо этого мы должны тщательно разработать визуализацию, что обращается в конкретный вопрос: какова предвзятость алгоритма?
 
-<p>To show bias, we must first define it. One definition is based on the probability that an array element at index <i>i</i> prior to shuffling will be at index <i>j</i> after shuffling. If the algorithm is unbiased, every element has equal probability of ending up at every index, and thus the probability for all <i>i</i> and <i>j</i> is the same: <i>1/n</i>, where <i>n</i> is the number of elements.
+<p>Чтобы определить предвзятость, мы должны сначала определить ее. Одно определение основано на вероятности того, что элемент массива с индексом <i>i</i> до перетасовки будет на месте индекса <i>j</i> после перетасовки. Если алгоритм беспристрастен, то каждый элемент имеет равную вероятность в конечном итоге оказаться на месте индекса <i>j</i>, и, таким образом, вероятность для всех <i>i</i> <i>j</i> такова: <i>1/n</i>, где <i>n</i> – число всех элементов.
 
-<p>Computing these probabilities analytically is difficult, since it depends on knowing the exact sorting algorithm used. But computing them empirically is easy: we simply shuffle thousands of times and count the number of occurrences of element <i>i</i> at index <i>j</i>. An effective display for this matrix of probabilities is a matrix diagram:
+<p>Аналитически вычислить эту вероятность трудно, так как она зависит от знания точности используемого алгоритма сортировки. Но вычислить ее эмпирически легко: мы просто выполним тасование тысячи раз и подсчитаем количество вхождений элемента <i>i</i> в индекс <i>j</i>. Эффективное отображение для этой матрицы вероятностей является данная схема:
 
 <style>
 
@@ -1392,18 +1392,18 @@ function ready(error, _, matrix) {
 })()</script>
 
 <aside style="margin-top:-200px;">
-  <b>SHUFFLE BIAS</b>
-  <br><i>column</i> = index before shuffle
-  <br><i>row</i> = index after shuffle
-  <br><i>green</i> = positive bias
-  <br><i>red</i> = negative bias
+  <b>ПРЕДВЗЯТОСТЬ ТАСОВАНИЯ</b>
+  <br><i>колонка</i> = индекс перед тасованием
+  <br><i>ряд</i> = индекс после тасования
+  <br><i>зеленый</i> = положительная предвзятость
+  <br><i>красный</i> = отрицательная предвзятость
 </aside>
 
-<p>The column (horizontal position) of the matrix represents the index of the element prior to shuffling, while the row (vertical position) represents the index of the element after shuffling. Color encodes probability: green cells indicate <i>positive bias</i>, where the element occurs more frequently than we would expect for an unbiased algorithm; likewise red cells indicate <i>negative bias</i>, where it occurs less frequently than expected.
+<p>Колонка (горизонтальная позиция) матрицы представляет индекс элемента до перетасовки, в то время как строка (вертикальная позиция) представляет собой индекс после перетасовки. Цвет кодирует вероятность: зеленые клетки показывают <i>положительную предвзятость</i>, где элемент встречается чаще, чем можно было бы ожидать для непредвзятого алгоритма; также красные клетки указывают на <i>негативную предвзятость</i>, где появление происходит реже чем ожидалось.
 
-<p>Random comparator shuffle in Chrome, shown above, is surprisingly mediocre. Parts of the array are only weakly biased. However, it exhibits a strong positive bias below the diagonal, which indicates a tendency to push elements from index <i>i</i> to <i>i+1</i> or <i>i+2</i>. There is also strange behavior for the first, middle and last row, which might be a consequence of Chrome using median-of-three quicksort.
+<p>Тасование случайным компаратором в Chrome, как показано выше, является удивительно посредственной. Части массива слабо смещены. Тем не менее, он обладает сильной положительной предвзятостью ниже диагонали, что свидетельствует о тенденции к проталкиванию элементов из индекса <i>i</i> в <i>i+1</i> или <i>i+2</i>. Существует также странное поведение для первого, среднего и последнего ряда, что может быть следствием использованием Chrome быстрой сортировки со средним из трех (median-of-three quicksort).
 
-<p>The unbiased Fisher–Yates algorithm looks like this:
+<p>Беспристрастный алгоритм Фишера–Йетса выглядит следующим образом:
 
 <p id="fisher-yates-shuffle-bias" class="shuffle-bias"><script>(function() {
 
@@ -1492,9 +1492,9 @@ beforeVisible(p.node(), function() {
 
 })()</script>
 
-<p>No patterns are visible in this matrix, other than a small amount of noise due to empirical measurement. (That noise could be reduced if desired by taking additional measurements.)
+<p>В этой матрице не наблюдается шаблонов, кроме небольшого количества шума из-за эмпирического измерения. (Этот шум может быть уменьшен при желании с получением дополнительных измерений.)
 
-<p>The behavior of random comparator shuffle is heavily dependent on your browser. Different browsers use different sorting algorithms, and different sorting algorithms behave very differently with (broken) random comparators. Here’s random comparator shuffle on Firefox:
+<p>Поведение тасования случайным компаратором сильно зависит от вашего браузера. Различные браузеры используют различные алгоритмы сортировки, и различные алгоритмы сортировки ведут себя очень по-разному со случайными (сломанными) компараторами. Вот перетасовка случайным компаратором в Firefox:
 
 <p id="random-comparator-firefox-shuffle-bias" class="shuffle-bias"><script>(function() {
 
@@ -1576,9 +1576,9 @@ function ready(error, _, matrix) {
 
 })()</script>
 
-<aside style="margin-top:-120px;">For an interactive version of these matrix diagrams to test alternative shuffling strategies, see <a href="http://bost.ocks.org/mike/shuffle/compare.html">Will It Shuffle?</a></aside>
+<aside style="margin-top:-120px;">Для интерактивной версии этих матричных диаграмм для тестирования альтернативных стратегий тасования смотрите <a href="http://bost.ocks.org/mike/shuffle/compare.html">Будет ли это перетасовано?</a></aside>
 
-<p>This is egregiously biased! The resulting array is often barely shuffled, as shown by the strong green diagonal in this matrix. This does not mean that Chrome’s sort is somehow “better” than Firefox’s; it simply means you should never use random comparator shuffle. Random comparators are fundamentally broken.
+<p>Это в высшей степени предвзято! Полученный массив часто едва перемешивается, что показано на сильно зеленой диагонали этой матрицы. Это не значит, что сортировка в Chrome чем-то “лучше” чем в Firefox; это всего лишь означает, что вы никогда не должны использовать тасование случайным компаратором. Случайные компараторы принципиально сломаны.
 
 <h2><a href="#sorting" name="sorting">#</a>Sorting</h2>
 
