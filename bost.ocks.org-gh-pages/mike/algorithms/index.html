@@ -2518,9 +2518,9 @@ function shuffle(array, i0, i1) {
 
 <aside><a href="http://bl.ocks.org/mbostock/1ef3b1fb9eb35ca8ffff">Randomized depth-first traversal</a></aside>
 
-<p>Rather than picking a new random passage each time, this algorithm always extends the deepest passage — the one with the longest path back to the root — in a random direction. Thus, randomized depth-first traversal only branches when the current path dead-ends into an earlier part of the maze. To continue, it backtracks until it can start a new branch. This snake-like exploration leads to mazes with significantly fewer branches and much longer, winding passages.
+<p>Вместо того, чтобы каждый раз расширять границу в случайном месте, этот алгоритм строит один путь в случайном направлении, пока это возможно. Как только расти уже некуда, обход в глубину возвращается к ближайшему месту, откуда можно стоиться дальше и пускает оттуда новую ветвь. Такой подход приводит к лабиринтам с малым ветвлением и длинными путями.
 
-<p>Prim’s algorithm constructs a <a href="http://en.wikipedia.org/wiki/Minimum_spanning_tree">minimum spanning tree</a>, a spanning tree of a graph with weighted edges with the lowest total weight. This algorithm can be used to construct a random spanning tree by initializing edge weights randomly:
+<p>Алгоритм Прима строит <a href="http://en.wikipedia.org/wiki/Minimum_spanning_tree">минимальное остовное дерево</a>, то есть остов взвешенного графа с минимальной суммой ребер. Этот алгоритм можно использовать для постройки случайного остовного дерева, если проинициализировать веса ребер случайными числами:
 
 <p id="randomized-prims" class="animation maze"><script>(function() {
 
@@ -2635,9 +2635,9 @@ function fillSouth(index) {
 
 <aside><a href="http://bl.ocks.org/mbostock/11159599">Randomized Prim’s</a></aside>
 
-<p>At each step, Prim’s algorithm extends the maze using the lowest-weighted edge (potential direction) connected to the existing maze. If this edge would form a loop, it is discarded and the next-lowest-weighted edge is considered.
+<p>На каждой итерации алгоритм Прима расширяет лабиринт, используя ребро минимального веса, которое соединяется с уже сгенерированной частью. Если при этом образуется цикл, то такое ребро выбрасывается и рассматривается следующее минимальное.
 
-<p>Prim’s algorithm is commonly implemented using a <a href="http://en.wikipedia.org/wiki/Heap_(data_structure)">heap</a>, which is an efficient data structure for prioritizing elements. When a new cell is added to the maze, connected edges (shown in red) are added to the heap. Despite edges being added in arbitrary order, the heap allows the lowest-weighted edge to be quickly removed.
+<p>В алгоритме Прима обычно используется такая структура данных как <a href="http://en.wikipedia.org/wiki/Heap_(data_structure)">куча</a> - эффективная реализация очереди с приоритетами. Когда в лабиринт добавляется новая клетка, смежные с ней ребра (показаны красным) добавляются в кучу. Вместо того, чтобы добавлять ребра в произвольном порядке, куча позволяет быстро извлекать ребро минимального веса. 
 
 <p>Lastly, a most unusual specimen:
 
