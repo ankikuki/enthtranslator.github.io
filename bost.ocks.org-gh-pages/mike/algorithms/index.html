@@ -58,8 +58,8 @@
 </style>
 
 <header>
-  <aside>June 26, 2014</aside>
-  <a href="../" rel="author">Mike Bostock</a>
+  <aside>Июнь 26, 2014</aside>
+  <a href="../" rel="author">Майк Босток</a>
 </header>
 
 <h1>Visualizing Algorithms</h1>
@@ -71,9 +71,9 @@
 
 <p>Визуализация алгоритмов &mdash; довольно необычная задача. Чтобы визуализировать алгоритм, мы не можем просто все данные перенести на диаграмму; здесь нет первичного набора данных. Здесь есть только логические правила, описывающие поведение. Это может быть причиной, по которой визуализация алгоритмов столь необычна, подобно тому, как дизайнеры экспериментируют с новыми формами для того, чтобы лучше общаться(??).
 
-<p>But algorithms are also a reminder that visualization is more than a tool for finding patterns in data. Visualization leverages the human visual system to <a href="http://www.dougengelbart.org/pubs/augment-3906.html">augment human intellect</a>: we can use it to better understand these important abstract processes, and perhaps other things, too.
+<p>Алгоритмы показывают, что визуализация &mdash; это больше, чем просто инструмент для наглядного представления данных. Визуализация использует зрение человека для <a href="http://www.dougengelbart.org/pubs/augment-3906.html">расширения способностей человеческого интеллекта</a>: она позволяет нам лучше понять все эти абстрактные процессы и, может быть, другие вещи.
 
-<aside style="margin-top:-7em;">This is an adaption of my talk at <a href="http://eyeofestival.com/">Eyeo 2014</a>. A video of the talk will be available soon. <!-- A <a href="https://vimeo.com/channels/544709/69448223">video of the talk</a> is available on Vimeo. --> (Thanks, Eyeo folks!)</aside>
+<aside style="margin-top:-7em;">Это адаптация моей речи на <a href="http://eyeofestival.com/">Eyeo 2014</a>. Запись речи будет доступна в ближайшее время. <!-- A <a href="https://vimeo.com/channels/544709/69448223">video of the talk</a> is available on Vimeo. --> (Спасибо людям с Eyeo!)</aside>
 
 <script src="d3.min.js"></script>
 <script>
@@ -310,19 +310,19 @@ function minHeap(compare) {
 
 </script>
 
-<h2><a href="#sampling" name="sampling">#</a>Sampling</h2>
+<h2><a href="#sampling" name="sampling">#</a>Дискретизация</h2>
 
-<p>Перед тем, как я смогу рассказать о первом алгоритме, мне нужно рассказать о проблеме, с которой он связан.
+<p>Перед тем, как я расскажу о первом алгоритме, мне нужно рассказать о проблеме, с которой он связан.
 
 <p style="height:360px;width:100%;overflow:hidden;"><img src="starry-night-detail.jpg" style="width:960px;">
 
-<aside>Ван Гог<i><a href="http://en.wikipedia.org/wiki/The_Starry_Night">Звездная ночь</a></i></aside>
+<aside>Ван Гог<i>&nbsp;<a href="https://ru.wikipedia.org/wiki/%D0%97%D0%B2%D1%91%D0%B7%D0%B4%D0%BD%D0%B0%D1%8F_%D0%BD%D0%BE%D1%87%D1%8C">&laquo;Звездная ночь&raquo;</a></i></aside>
 
 <p>Свет - это электромагнитное излучение. Он льется из экрана, движется через воздух, фокусируется хрусталиком вашего глаза и проецируется на сетчатку. Это непрерывный сигнал. Для работы с ним нам нужно редуцировать свет к потоку дискретных имульсов, измеряя его интенсивность и частоту в различных точках пространства.
 
-<p>Такой процесс редукции называется <i>sampling</i>, and it is essential to vision. You can think of it as a painter applying discrete strokes of color to form an image (particularly in <a href="http://en.wikipedia.org/wiki/Pointillism">Pointillism</a> or <a href="http://en.wikipedia.org/wiki/Divisionism">Divisionism</a>). Sampling is further a core concern of computer graphics; for example, to rasterize a 3D scene by raytracing, we must determine where to shoot rays. Even resizing an image requires sampling.
+<p>Такой процесс редукции называется <i>дискретизация(sampling)</i>, и это действительно важно для визуализации. Можно сравнить это с тем, как художник составляет картину из отдельных мазков, штрихов (особенно это ярко выражается в <a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%83%D0%B0%D0%BD%D1%82%D0%B8%D0%BB%D0%B8%D0%B7%D0%BC">Пуантиллизме</a> и <a href="https://en.wikipedia.org/wiki/Divisionism">Дивизионизме</a>). Sampling is further a core concern of computer graphics; for example, to rasterize a 3D scene by ray tracing, we must determine where to shoot rays. Even resizing an image requires sampling.
 
-<p>Sampling is made difficult by competing goals. On the one hand, samples should be evenly distributed so there are no gaps. But we must also avoid repeating, regular patterns, which cause <a href="http://en.wikipedia.org/wiki/Aliasing">aliasing</a>. This is why you shouldn’t wear a finely-striped shirt on camera: the stripes resonate with the grid of pixels in the camera’s sensor and cause <a href="http://en.wikipedia.org/wiki/Moiré_pattern">Moiré patterns</a>.
+<p>Дискретизация осложняется наличием других целей. С одной стороны, между элементами не должно быть никаких пробелов. Но вместе с тем, нужно избежать <a href="https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B8%D0%B0%D1%81%D0%B8%D0%BD%D0%B3">наложения(aliasing)</a>. Поэтому, например, не стоит одевать рубакшку в мелкую полоску на камеру: полоски наложатся на сетку пикселей, что приведёт к появлению <a href="https://ru.wikipedia.org/wiki/%D0%9C%D1%83%D0%B0%D1%80%D0%BE%D0%B2%D1%8B%D0%B9_%D1%83%D0%B7%D0%BE%D1%80">Муарового узора</a>.
 
 <p style="height:360px;width:100%;overflow:hidden;"><img src="retinal-cone-mosaic.jpg" style="width:960px;">
 
