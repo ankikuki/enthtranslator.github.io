@@ -2255,7 +2255,7 @@ function mergesort(array) {
 
 <p>Последнее, на что мы посмотрим - генерация лабиринтов. Все алгоритмы этой секции генерируют <a href="http://en.wikipedia.org/wiki/Spanning_tree">остовное дерево</a> двумерной прямоугольной сетки. Это значит, что нет циклов, и до каждой клетки лабиринта существует уникальный путь от корня (нижней левой клетки).
 
-<p>I apologize for the esoteric subject — I don’t know enough to say why these algorithms are useful beyond simple games, and possibly something about electrical networks. But even so, they are fascinating from a visualization perspective because they solve the same, highly-constrained problem in wildly-different ways.
+<p>Извиняюсь, что мне нечего сказать о том, где применяются эти алгоритмы кроме как в простых играх. Но, несмотря на это, они замечательны для рисования лабиринтов, потому что решают одну и ту же довольно ограниченную условиями задачу различными способами. 
 
 <p>И на них просто забавно смотреть.
 
@@ -2386,12 +2386,11 @@ function popRandom(array) {
 
 <aside><a href="http://bl.ocks.org/mbostock/70a28267db0354261476">Random traversal</a></aside>
 
-<p>Случайный алгоритм обхода ставит первую клетку лабиринта в левый нижний угол. Затем он отслеживает все возможные пути, куда можно расширить лабиринт (крассные клетки). На каждом шаге случайно выбирается один из таких путей, и лабиринт расширяется, если он не соединяется с другой частью ещё раз.
 <p>Случайный алгоритм обхода ставит первую клетку лабиринта в левый нижний угол. Затем он отслеживает все возможные пути, куда можно расширить лабиринт (красные клетки). На каждом шаге случайно выбирается один из таких путей, и лабиринт расширяется, если при этом не создается цикл.
 
-<p>Также как и Bridon’s Poisson-disc sampling algorithm, случайный обход поддерживает границу и случайно выбирает, куда от нее расширяться. Так поведения обоих алгоритмов похоже на рост корневой системы деревьев.
+<p>Также как и Bridon’s Poisson-disc sampling algorithm, случайный обход поддерживает границу и случайно выбирает, куда от нее расширяться. Так поведение обоих алгоритмов похоже на рост корневой системы деревьев.
 
-<p>Рандомизированный обход в глубину следует совершенно другим законам:
+<p>Рандомизированный обход в глубину следует совершенно другим правилам:
 
 <p id="randomized-depth-first-traversal" class="animation maze"><script>(function() {
 
@@ -2639,7 +2638,7 @@ function fillSouth(index) {
 
 <p>В алгоритме Прима обычно используется такая структура данных как <a href="http://en.wikipedia.org/wiki/Heap_(data_structure)">куча</a> - эффективная реализация очереди с приоритетами. Когда в лабиринт добавляется новая клетка, смежные с ней ребра (показаны красным) добавляются в кучу. Вместо того, чтобы добавлять ребра в произвольном порядке, куча позволяет быстро извлекать ребро минимального веса. 
 
-<p>Lastly, a most unusual specimen:
+<p>Напоследок, самый необычный экземпляр:
 
 <p id="wilsons" class="animation maze"><script>(function() {
 
@@ -2816,15 +2815,15 @@ function fillSouth(index) {
 
 <aside><a href="http://bl.ocks.org/mbostock/11357811">Wilson’s</a></aside>
 
-<p>Wilson’s algorithm uses <a href="http://en.wikipedia.org/wiki/Loop-erased_random_walk">loop-erased random walks</a> to generate a uniform spanning tree — an unbiased sample of all possible spanning trees. The other maze generation algorithms we have seen lack this beautiful mathematical property.
+<p>Алгоритм Вильсона использует <a href="http://en.wikipedia.org/wiki/Loop-erased_random_walk">случайное блуждание, стирающее циклы</a> чтобы сгенерировать случайное остовное дерево, причем любое существующее остовное дерево будет сгенерированно с равной вероятностью. Предыдущие алгоритмы не обладали таким замечательным математическим свойством.
 
-<p>The algorithm initializes the maze with an arbitrary starting cell. Then, a new cell is added to the maze, initiating a random walk (shown in red). The random walk continues until it reconnects with the existing maze (shown in white). However, if the random walk intersects itself, the resulting loop is erased before the random walk continues.
+<p>Сначала выбирается стартовая клетка. Затем к ней присоединяется еще клетка, образуя случайный путь (показано красным). Так продолжается до тех пор, пока этот путь не встретится с уже построенным лабиринтом (показан белым). При этом, если строящийся путь встречает сам себя, образующийся цикл стирается, перед тем, как продолжить строиться.
 
-<p>Initially, the algorithm can be frustratingly slow to watch, as early random walks are unlikely to reconnect with the small existing maze. As the maze grows, random walks become more likely to collide with the maze and the algorithm accelerates dramatically.
+<p>Когда алгоритм только начинает свою работу, случайный путь может долго искать маленькую, уже построенную часть лабиринта. Но с ростом лабиринта, растет и скорость его построения, так как встреча пути и построенной части становится более вероятной.
 
-<p>These four maze generation algorithms work very differently. And yet, when the animations end, the resulting mazes are difficult to distinguish from each other. The animations are useful for showing how the algorithm works, but fail to reveal the resulting tree structure.
+<p>Показанные четыре алгоритма работают совершенно по разному. Но сейчас, после того как все нарисованно, становится трудно различить лабиринты друг от друга. Анимация хороша, чтоб продемострировать каким образом работают алгоритмы, но не способна показать итоговую структуру.
 
-<p>A way to show structure, rather than process, is to flood the maze with color:
+<p>Один из вариантов показать структуру - залить лабиринт краской:
 
 <p id="random-traversal-color-maze" class="animation maze"><script>(function() {
 
@@ -2945,9 +2944,9 @@ function fillSouth(index) {
 
 <aside><a href="http://bl.ocks.org/mbostock/11167589">Random traversal</a></aside>
 
-<p>Color encodes tree depth — the length of the path back to the root in the bottom-left corner. The color scale cycles as you get deeper into the tree; this is occasionally misleading when a deep path circles back adjacent to a shallow one, but the higher contrast allows better differentiation of local structure. (This is not a convential rainbow color scale, which is nominally <a href="http://eagereyes.org/basics/rainbow-color-map">considered harmful</a>, but a <a href="http://bl.ocks.org/mbostock/310c99e53880faec2434">cubehelix rainbow</a> with improved perceptual properties.)
+<p>Цвет кодирует глубину дерева - длину пути до корня. Цвет циклично меняется проходя глубже по дереву; это может вводить в заблуждение, когда длинные пути находятся недалеко от коротких, но повышение контраста должно решить эту проблему. (Здесь применена не общепринятая радужная гамма, которая номинально <a href="http://eagereyes.org/basics/rainbow-color-map">считается вредной</a>, а <a href="http://bl.ocks.org/mbostock/310c99e53880faec2434">cubehelix rainbow</a> с улучшеным свойством восприятия)
 
-<p>We can further emphasize the structure of the maze by subtracting the walls, reducing visual noise. Below, each pixel represents a path through the maze. As above, paths are colored by depth and color floods deeper into the maze over time.
+<p>Мы можем представить структуру лабиринта более наглядно, удалив стены и визуальный шум. На анимации ниже каждый пиксель лежит на каком-нибудь пути лабиринта. Как и прежде, пути раскрашиваются соответственно глубине.
 
 <p id="random-traversal-color-flood" class="animation"><script>(function() {
 
@@ -3034,9 +3033,9 @@ function click() {
 
 <aside><a href="http://bl.ocks.org/mbostock/11337835">Random traversal</a></aside>
 
-<p>Concentric circles of color, like a tie-dye shirt, reveal that random traversal produces many branching paths. Yet the shape of each path is not particularly interesting, as it tends to go in a straight line back to the root. Because random traversal extends the maze by picking randomly from the frontier, paths are never given much freedom to meander — they end up colliding with the growing frontier and terminate due to the restriction on loops.
+<p>Концентрические окружности из цветов говорят о том, что алгоритм случайного обхода строит пути с множеством ответвлений. Форма путей не слишком то интересна, ибо она представляет из себя прямую линию до корня. Из-за того, что алгоритм расширяет  лабиринт, выбирая рандомную клетку на границе, у путей не ни одной возможности для маневра.
 
-<p>Randomized depth-first traversal, on the other hand, is <i>all</i> about the meander:
+<p>Рандомизированный обход в глубину, наоборот, <i>весь</i> состоит из маневров:
 
 <p id="randomized-depth-first-traversal-color-flood" class="animation"><script>(function() {
 
@@ -3123,9 +3122,9 @@ function click() {
 
 <aside><a href="http://bl.ocks.org/mbostock/949c772b81296f8e4188">Randomized depth-first traversal</a></aside>
 
-<p>This animation proceeds at fifty times the speed of the previous one. This speed-up is necessary because randomized depth-first traversal mazes are much, much deeper than random traversal mazes due to limited branching. You can see that typically there is only one, and rarely more than a few, active branches at any particular depth.
+<p>Анимация выше ускорена в пятьдесят раз по сравнению с предыдущей. Это ускорение важно, так как итоговые лабиринты гораздо, гораздо глубже, чем у алгоритма случайного обхода. Как можно видеть, обычно на каждом шаге у лабиринта всего одна (редко, несколько) активная ветка.
 
-<p>Now Prim’s algorithm on a random graph:
+<p>А сейчас алгоритм Прима на случайном графе:
 
 <p id="randomized-prims-color-flood" class="animation"><script>(function() {
 
@@ -3212,9 +3211,9 @@ function click() {
 
 <aside><a href="http://bl.ocks.org/mbostock/11377353">Randomized Prim’s</a></aside>
 
-<p>This is more interesting! The simultaneously-expanding florets of color reveal substantial branching, and there is more complex global structure than random traversal.
+<p>Это гораздо интересней! Одновременно расширяющиеся бутоны цветов показывают основное ветвление, и здесь появляется более сложная глобальная структура, нежели чем при случайном обходе.
 
-<p>Wilson’s algorithm, despite operating very differently, seems to produce very similar results:
+<p>Алгоритм Вильсона работает совершенно подругому, однако показывает схожий результат:
 
 <p id="wilsons-color-flood" class="animation"><script>(function() {
 
@@ -3301,9 +3300,9 @@ function click() {
 
 <aside><a href="http://bl.ocks.org/mbostock/11363008">Wilson’s</a></aside>
 
-<p>Just because they <i>look</i> the same does not mean they <i>are</i>. Despite appearances, Prim’s algorithm on a randomly-weighted graph does not produce a uniform spanning tree (as far as I know — proving this is outside my area of expertise). Visualization can sometimes mislead due to human error. An earlier version of the Prim’s color flood had a bug where the color scale rotated twice as fast as intended; this suggested that Prim’s and Wilson’s algorithms produced very different trees, when in fact they appear much more similar than different.
+<p>Только из-за того, что они <i>выглядят</i> одинаково, это не значит что они <i>на самом деле</i> одинаковые. Не смотря на внешний вид, алгоритм Прима на случайном графе на строит любое остовное дерево с равной веротностью (на сколько я знаю - доказать это не в моей компетенции). Визуализация может иногда вводить в заблуждение из-за человеческого фактора. Ранняя версия анимации алгоритма Прима с заполнением цветом содержала баг - цвета менялись в два раза быстрее, чем нужно. И это заставляло думать, что алгоритмы Прима и Вильсона строят совершенно разные деревья, однако на самом деле у них много общего.
 
-<p>Since these mazes are spanning trees, we can also use specialized tree visualizations to show structure. To illustrate the duality between maze and tree, here the passages (shown in white) of a maze generated by Wilson’s algorithm are gradually transformed into a <a href="http://bl.ocks.org/mbostock/4339184">tidy tree layout</a>. As with the other animations, it proceeds by depth, starting with the root and descending to the leaves:
+<p>Благодаря тому, что лабиринты - это остовные деревья, мы можем использовать специальную визуализацию в виде деревьев, чтобы показать структуру. Чтобы проиллюстрировать двойственность лабиринтов и деревьев, здесь представлена анимация постепенного превращения лабиринта из алгоритма Вильсона в <a href="http://bl.ocks.org/mbostock/4339184">аккуратную древесную структуру</a>. Как и в предыдущих анимациях, действие начинается от корня и заканчивается в листьях:
 
 <p id="wilsons-tree" class="animation maze"><script>(function() {
 
@@ -3520,7 +3519,7 @@ function generateMaze(width, height) {
 
 <aside><a href="http://bl.ocks.org/mbostock/061b3929ba0f3964d335">Wilson’s</a></aside>
 
-<p>For comparison, again we see how randomized depth-first traversal produces trees with long passages and little branching.
+<p>Для сравнения, посмотрим как рандомизированный обход в глубину генерирует лабиринты с длинными путями и небольшим ветвлением.
 
 <style>
 
@@ -3657,7 +3656,7 @@ function generateMaze(width, height) {
 
 <aside><a href="http://bl.ocks.org/mbostock/c11d97ee1415d3ac4176">Randomized depth-first traversal</a></aside>
 
-<p>Both trees have the same number of nodes (3,239) and are scaled to fit in the same area (960×500 pixels). This hides an important difference: at this size, randomized depth-first traversal typically produces a tree two-to-five times deeper than Wilson’s algorithm. The tree depths above are <span id="wilsons-tree-depth">_</span> and <span id="randomized-depth-first-tree-depth">_</span>, respectively. In the larger 480,000-node mazes used for color flooding, randomized depth-first traversal produces a tree that is 10-20 times deeper!
+<p>Оба дерева имеют равное количество узлов (3,239) и масштабированны, чтобы вместиться на одинаковой площади (960×500 pixels). Это скрывает одно важное различие: на самом деле рандомизированный обход в глубину строит в два-пять раз более глубокие пути по сравнению с алгоритмом Вильсона. Глубина деревьев, изображенных выше <span id="wilsons-tree-depth">_</span> и <span id="randomized-depth-first-tree-depth">_</span>, соответственно. На больших лабиринтах с 480,000 узлами рандомизированный обход в глубину строит в 10-20 раз более глубокие пути!
 
 <h2><a href="#vision" name="vision">#</a>Using Vision to Think</h2>
 
