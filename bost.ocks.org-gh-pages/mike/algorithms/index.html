@@ -1580,11 +1580,11 @@ function ready(error, _, matrix) {
 
 <p>Это в высшей степени предвзято! Полученный массив часто едва перемешивается, что показано на сильно зеленой диагонали этой матрицы. Это не значит, что сортировка в Chrome чем-то “лучше” чем в Firefox; это всего лишь означает, что вы никогда не должны использовать тасование случайным компаратором. Случайные компараторы принципиально сломаны.
 
-<h2><a href="#sorting" name="sorting">#</a>Sorting</h2>
+<h2><a href="#sorting" name="sorting">#</a>Сортировка</h2>
 
-<p>Sorting is the inverse of shuffling: it creates order from disorder, rather than <i>vice versa</i>. This makes sorting a harder problem with diverse solutions designed for different trade-offs and constraints.
+<p>Сортировка обратна перемешиванию: она создаёт порядок из беспорядка, а не наоборот. Это делает сортировку более сложной проблемой с разнообразными решениями, которые разработаны с разными компромиссами и ограничениями.
 
-<p>One of the most well-known sorting algorithms is quicksort.
+<p>Один из самых известных алгоритмов сортировки - это быстрая сортировка.
 
 <p id="quicksort" class="animation shuffle"><script>(function() {
 
@@ -1703,13 +1703,13 @@ function quicksort(array) {
 
 })()</script>
 
-<aside><a href="http://bl.ocks.org/mbostock/e1e1e7e2c360bec054ba">Quicksort</a></aside>
+<aside><a href="http://bl.ocks.org/mbostock/e1e1e7e2c360bec054ba">Быстрая сортировка</a></aside>
 
-<p>Quicksort first partitions the array into two parts by picking a pivot. The left part contains all elements less than the pivot, while the right part contains all elements greater than the pivot. After the array is partitioned, quicksort recurses into the left and right parts. When a part contains only a single element, recursion stops.
+<p>Сначала быстрая сортировка делит массив на две части, выбирая опорный элемент. Левая часть содержит все элементы, которые меньше опорного, тогда как правая часть содержит элементы, которые больше опорного. После того как массив разделён, быстрая сортировка рекурсивно применяется для левой и правой частей. Когда часть содержит только один элемент, рекурсия останавливается.
 
-<p>The partition operation makes a single pass over the active part of the array. Similar to how the Fisher–Yates shuffle incrementally builds the shuffled section by swapping elements, the partition operation builds the lesser (left) and greater (right) parts of the subarray incrementally. As each element is visited, if it is less than the pivot it is swapped into the lesser part; if it is greater than the pivot the partition operation moves on to the next element.
+<p>Операция разделения делает один проход по активной части массива. Аналогично тому, как тасование Фишера-Йетса шаг за шагом строит перемешанную часть, меняя элементы, операция разделения строит меньшую (левую) и большую (правую) части подмассива шаг за шагом. Проходя по каждому элементу, если он больше чем опорный, то он перемещается в меньшую часть массива; если элемент больше опорного, то операция разделения перемещается на следующий элемент.
 
-<p>Here’s the code:
+<p>Вот исходный код:
 
 <pre><code class="javascript">function quicksort(array, left, right) {
   if (left < right - 1) {
@@ -1732,17 +1732,17 @@ function partition(array, left, right, pivot) {
   return left;
 }</code></pre>
 
-<p>There are many variations of quicksort. The one shown above is one of the simplest — and slowest. This variation is useful for teaching, but in practice more elaborate implementations are used for better performance.
+<p>Есть много разновидностей быстрой сортировки. Показанная выше одна из самых простых - и самых медленных. Этот вариант полезен для изучения, но на практике используются более сложные реализации для повышения производительности.
 
-<p>A common improvement is “median-of-three” pivot selection, where the median of the first, middle and last elements is used as the pivot. This tends to choose a pivot closer to the true median, resulting in similarly-sized left and right parts and shallower recursion. Another optimization is switching from quicksort to <a href="http://en.wikipedia.org/wiki/Insertion_sort">insertion sort</a> for small parts of the array, which can be faster due to the overhead of function calls.
+<p>Распространённое улучшение - "среднее-из-трёх" при выборе опорного элемента, где среднее между первым, средним и последним элементом используется как опорный элемент. Это, как правило, позволяет выбрать опорный элемент ближе к истинному среднему, получая таким образом левую и правую части одинакового размера и меньшую рекурсию. Другая оптимизация - это включение  <a href="http://en.wikipedia.org/wiki/Insertion_sort">сортировки вставками</a> для маленьких частей массива, которая может быть быстрее из-за отсутствия накладных расходов на вызовы функций.
 
-<aside>A particularly clever variation is Yaroslavskiy’s dual-pivot quicksort, which partitions the array into three parts rather than two. This is the default sorting algorithm in Java and Dart.</aside>
+<aside>Особо умная вариация - двухопорная быстрая сортировка Ярославского, которая разделяет массив на три части вместо двух. Это стандартный алгоритм сортировки на Java и Dart.</aside>
 
-<p>The sort and shuffle animations above have the nice property that time is mapped to time: we can simply watch how the algorithm proceeds. But while intuitive, animation can be frustrating to watch, especially if we want to focus on an occasional weirdness in the algorithm’s behavior. Animations also rely heavily on our memory to observe patterns in behavior. While animations are improved by controls to pause and scrub time, static displays that show everything at once can be even more effective. The eye scans faster than the hand.
+<p>Анимации сортировки и перемешивания выше имеют прекрасное свойство - время сопоставляется времени: мы можем просто смотреть как алгоритм работает. Но когда всё интуитивно понятно, анимации может быть бесполезно смотреть, особенно если мы хотим сконцентрироваться на случайных странностях в поведении алгоритма. Анимации так же сильно полагаются на способности нашей памяти наблюдать шаблоны в поведении. В то время как анимации улучшаются элементами управления для остановки и перемотки времени, статические анимации, которые показывают всё и сразу, могут быть даже более эффективными. Глаз сканирует быстрее чем рука.
 
-<p>A simple way of turning an animation into a static display is to pick key frames from the animation and display those sequentially, like a comic strip. If we then remove redundant information across key frames, we use space more efficiently. A denser display may require more study to understand, but is faster to scan since the eye travels less.
+<p>Простой способ превращения анимации в статическую картинку - это подобрать ключевые кадры из анимации и отобразить их последовательно, как комикс. Если мы затем удалим избыточную информацию в ключевых кадрах, мы используем место более эффективно. Сжатая картинка может потребовать большего изучения для понимания, но даёт более быстрое сканирование, так как глаз передвигается меньше.
 
-<p>Below, each row shows the state of the array prior to recursion. The first row is the initial state of the array, the second row is the array after the first partition operation, the third row is after the first partition’s left and right parts are again partitioned, <i>etc.</i> In effect, this is breadth-first quicksort, where the partition operation on both left and right proceeds in parallel.
+<p>Ниже каждая строка показывает состояние массива перед рекурсией. В первой строке отображено начальное состояние массива, вторая строка показывает массив после первой операции разделения, третья строка содержит массив после первого разделения левой и правой части, <i>и т.д.</i> Это по сути быстрая сортировка в ширину, где операция разделения на левой и правой части проводится параллельно.
 
 <style>
 
@@ -1836,11 +1836,12 @@ function quicksort(array) {
 
 })()</script>
 
-<aside><a href="http://bl.ocks.org/mbostock/eb3bf12a9d02d78480c2">Quicksort</a></aside>
+<aside><a href="http://bl.ocks.org/mbostock/eb3bf12a9d02d78480c2">Быстрая сортировка</a></aside>
 
-<p>As before, the pivots for each partition operation are highlighted in red. Notice that the pivots turn gray at the next level of recursion: after the partition operation completes, the associated pivot is in its final, sorted position. The total depth of the display — the maximum depth of recursion — gives a sense of how efficiently quicksort performed. It depends heavily on input and pivot choice.
+<p>Как и прежде, опорные элеметы для каждой операции разделения подсвечены красным. Обратите внимание, что опорные элементы становятся серыми на следующем уровне рекурсии: после того, как операция разделения завершилась, ассоциированый опорный элемент находится в конечно, сортированной позиции. Общая глубина картинки - максимальная глубина рекурсии - даёт представление о том, как эффективно быстрая сортировка выполняется. Общая глубина картинки - максимальная глубина рекурсии - даёт представление о том, как эффективно быстрая сортировка выполняется. Это сильно зависит от входных данных и от выбора опорного элемента.
 
-<p>Another static display of quicksort, less dense but perhaps easier to read, represents each element as a colored thread and shows each sequential swap. (This form is inspired by <a href="http://corte.si/posts/code/visualisingsorting/">Aldo Cortesi</a>’s sorting visualizations.) Smaller values are lighter, and larger values are darker.
+<p>Другое статическое представление быстрой сортировки, менее плотное, но, возможно, более простое в понимании, представляет каждый элемент как цветной поток и показывает как они последовательно меняются местами. (Эта форма была взята из <a href="http://corte.
+si/posts/code/visualisingsorting/">Aldo Cortesi</a>’s визуализаций сортировки) Меньшие значения светлее, большие - темнее.
 
 <style>
 
@@ -2255,7 +2256,7 @@ function mergesort(array) {
 
 <p>Последнее, на что мы посмотрим - генерация лабиринтов. Все алгоритмы этой секции генерируют <a href="http://en.wikipedia.org/wiki/Spanning_tree">остовное дерево</a> двумерной прямоугольной сетки. Это значит, что нет циклов, и до каждой клетки лабиринта существует уникальный путь от корня (нижней левой клетки).
 
-<p>Извиняюсь, что мне нечего сказать о том, где применяются эти алгоритмы кроме как в простых играх. Но, несмотря на это, они замечательны для рисования лабиринтов, потому что решают одну и ту же довольно ограниченную условиями задачу различными способами. 
+<p>Извиняюсь, что мне нечего сказать о том, где применяются эти алгоритмы кроме как в простых играх. Но, несмотря на это, они замечательны для рисования лабиринтов, потому что решают одну и ту же довольно ограниченную условиями задачу различными способами.
 
 <p>И на них просто забавно смотреть.
 
@@ -2636,7 +2637,7 @@ function fillSouth(index) {
 
 <p>На каждой итерации алгоритм Прима расширяет лабиринт, используя ребро минимального веса, которое соединяется с уже сгенерированной частью. Если при этом образуется цикл, то такое ребро выбрасывается и рассматривается следующее минимальное.
 
-<p>В алгоритме Прима обычно используется такая структура данных как <a href="http://en.wikipedia.org/wiki/Heap_(data_structure)">куча</a> - эффективная реализация очереди с приоритетами. Когда в лабиринт добавляется новая клетка, смежные с ней ребра (показаны красным) добавляются в кучу. Вместо того, чтобы добавлять ребра в произвольном порядке, куча позволяет быстро извлекать ребро минимального веса. 
+<p>В алгоритме Прима обычно используется такая структура данных как <a href="http://en.wikipedia.org/wiki/Heap_(data_structure)">куча</a> - эффективная реализация очереди с приоритетами. Когда в лабиринт добавляется новая клетка, смежные с ней ребра (показаны красным) добавляются в кучу. Вместо того, чтобы добавлять ребра в произвольном порядке, куча позволяет быстро извлекать ребро минимального веса.
 
 <p>Напоследок, самый необычный экземпляр:
 
