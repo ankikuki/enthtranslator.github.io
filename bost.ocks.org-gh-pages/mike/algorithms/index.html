@@ -318,19 +318,19 @@ function minHeap(compare) {
 
 <aside>Ван Гог<i>&nbsp;<a href="https://ru.wikipedia.org/wiki/%D0%97%D0%B2%D1%91%D0%B7%D0%B4%D0%BD%D0%B0%D1%8F_%D0%BD%D0%BE%D1%87%D1%8C">&laquo;Звездная ночь&raquo;</a></i></aside>
 
-<p>Свет - это электромагнитное излучение. Он льется из экрана, движется через воздух, фокусируется хрусталиком вашего глаза и проецируется на сетчатку. Это непрерывный сигнал. Для работы с ним нам нужно редуцировать свет к потоку дискретных имульсов, измеряя его интенсивность и частоту в различных точках пространства.
+<p>Свет — это электромагнитное излучение. Он льется из экрана, движется через воздух, фокусируется хрусталиком вашего глаза и проецируется на сетчатку. Это непрерывный сигнал. Для работы с ним нам нужно редуцировать свет к потоку дискретных имульсов, измеряя его интенсивность и частоту в различных точках пространства.
 
 <p>Такой процесс редукции называется <i>дискретизация</i>, и он необходим для зрения. Вы можете думать об этом, как о художнике, который использует отдельные мазки цветами для формирования изображения (например в <a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%83%D0%B0%D0%BD%D1%82%D0%B8%D0%BB%D0%B8%D0%B7%D0%BC">Пуантилизме</a>). Более того, дискретизация является основой компьютерной графики; например, для растеризации 3D сцены методом трассировки лучей мы должны определить взаимодейстия отдельных лучей с поверхностями. Даже изменение размеров изображение требует дискретизации.
 
-<p>Дискретизация -- сложный процесс, т.к. преследует несколько целей. С одной стороны, результат должен быть равномерно распределен таким образом, чтобы не было никаких пробелов. Но с другой стороны мы должны избегать повторения, закономерностей, т.к. они приводят к тому, что разные сигналы могут восприниматься одинаково. Вот почему не стоит надевать мелко-полосатую рубашку для съемок на камеру: полосы резонируют с сеткой пикселей в сенсоре камеры и вызывают <a href="https://ru.wikipedia.org/wiki/%D0%9C%D1%83%D0%B0%D1%80%D0%BE%D0%B2%D1%8B%D0%B9_%D1%83%D0%B7%D0%BE%D1%80">муаровый узор</a>.
+<p>Дискретизация — сложный процесс, т.к. преследует несколько целей. С одной стороны, результат должен быть равномерно распределен таким образом, чтобы не было никаких пробелов. Но с другой стороны мы должны избегать повторения, закономерностей, т.к. они приводят к тому, что разные сигналы могут восприниматься одинаково. Вот почему не стоит надевать мелко-полосатую рубашку для съемок на камеру: полосы резонируют с сеткой пикселей в сенсоре камеры и вызывают <a href="https://ru.wikipedia.org/wiki/%D0%9C%D1%83%D0%B0%D1%80%D0%BE%D0%B2%D1%8B%D0%B9_%D1%83%D0%B7%D0%BE%D1%80">муаровый узор</a>.
 
 <p style="height:360px;width:100%;overflow:hidden;"><img src="retinal-cone-mosaic.jpg" style="width:960px;">
 
-<aside>Photo: <a href="http://www.retinalmicroscopy.com/mosaics.html">retinalmicroscopy.com</a><p>Эта фотография человеческой сетчатки. Более крупные ячейки -- <i>колбочки</i>, которые обеспечивают человеку цветное зрение, маленькие ячейки - <i>палочки</i>, которые отвечают за способность видеть в темноте.</aside>
+<aside>Фотография: <a href="http://www.retinalmicroscopy.com/mosaics.html">retinalmicroscopy.com</a><p>Эта фотография человеческой сетчатки. Более крупные ячейки — <i>колбочки</i>, которые обеспечивают человеку цветное зрение, маленькие ячейки — <i>палочки</i>, которые отвечают за способность видеть в темноте.</aside>
 
-<p>Благодаря правильному размещению фоторецепторов сетчатка глаза легко справляется с дискретизацией. Рецепторы покрывают сетчатку плотно и равномерно (за исключением слепого пятна), и все же относительное положение клеток хаотично. Это называется Poisson-disc distribution, такое распределение обеспечивает минимальное расстояние между рецепторами, отсутствие наложений и оптимальное использование фоторецепторов.
+<p>Благодаря правильному размещению фоторецепторов сетчатка глаза легко справляется с дискретизацией. Рецепторы покрывают сетчатку плотно и равномерно (за исключением слепого пятна), и все же относительное положение клеток хаотично. Это называется Poisson-disc distribution (<i>Дисковое распределене Пуассона, диск Пуассона прим. пер.</i>), такое распределение обеспечивает минимальное расстояние между рецепторами, отсутствие наложений и оптимальное использование фоторецепторов.
 
-<p>К сожалению, создать это распределение сложно. Вот простой вариант, известный как Mitchell’s best-candidate algorithm.
+<p>К сожалению, создать это распределение сложно. Вот простой вариант, известный как Mitchell’s best-candidate algorithm (<i>далее будем называть "алгоритм наилучшего выбора" прим. пер.</i>).
 
 <p class="animation" id="best-candidate-sampling"><script>(function() {
 
@@ -382,7 +382,7 @@ function click() {
 
 })()</script>
 
-<aside><a href="http://bl.ocks.org/mbostock/981b42034400e48ac637">Best-candidate</a></aside>
+<aside><a href="http://bl.ocks.org/mbostock/981b42034400e48ac637">Наилучшй кандидат</a></aside>
 
 <p>Как можно видеть, алгоритм строит желанное рандомное распределение. Однако, есть недостатки: в некоторых местах собирается слишком много сэмплов (oversampling), а в других - наоборот слишком мало. Но, все таки, результат не плох.
 
@@ -544,13 +544,13 @@ function click() {
 
 })()</script>
 
-<aside><a href="http://bl.ocks.org/mbostock/d7bf3bd67d00ed79695b">Best-candidate</a></aside>
+<aside><a href="http://bl.ocks.org/mbostock/d7bf3bd67d00ed79695b">Наилучший кандидат</a></aside>
 
-<p>For each new sample, the best-candidate algorithm generates a fixed number of candidates, shown in gray. (Here, that number is 10.) Each candidate is chosen uniformly from the sampling area.
+<p>Для каждой новой выборки алгоритм наилучшего выбора генерирует фиксированное количество кандидатов, отмеченных серым (здесь их на каждом шаге 10 штук). Каждый кандидат выбирается в пространстве случайным образом, используя равномерное распределение.
 
-<p>The <i>best candidate</i>, shown in red, is the one that is farthest away from all previous samples, shown in black. The distance from each candidate to the closest sample is shown by the associated line and circle: notice that there are no other samples inside the gray or red circles. After all candidates are created and distances measured, the best candidate becomes the new sample, and the remaining candidates are discarded.
+<p>Отмеченный красным <i>наилучший кандидат</i> является самым удаленным от всех элементов выборки, отмеченных черным. Расстояние от каждого кандидата до ближайшего элемента выборки показано с помощью соовствующих линии и окружности: обратите внимание, что внутри серых или красных окружностей нет других элементов выборки. После того, как все кандидаты сгенерированы и все расстояния посчитаны, наилучший становится новым элементов выборки, а остальные кандидаты отбрасываются.
 
-<p>Now here’s the code:
+<p>Теперь код:
 
 <pre><code class="javascript">function sample() {
   var bestCandidate, bestDistance = 0;
@@ -565,11 +565,11 @@ function click() {
   return bestCandidate;
 }</code></pre>
 
-<p>As I explained the algorithm above, I will let the code stand on its own. (And the purpose of this essay is to let you study code through visualization, besides.) But I will clarify a few details:
+<p>Поскольку я объяснил алгоритм выше, I will let the code stand on its own. (Ну и вообще, цель этой статьи - это дать вам возможность изучать код с помощью визуализаций.) Но я поясню несколько деталей:
 
-<p>The external <code>numCandidates</code> defines the number of candidates to create per sample. This parameter lets you trade-off speed with quality. The lower the number of candidates, the faster it runs. Conversely, the higher the number of candidates, the better the sampling quality.
+<p>Внешняя переменная <code>numCandidates</code> определяет количество кандидатов, которые будет генерироваться для каждой выборки. Этот параметр поможет вам найти компромисс между скоростью и качеством. Меньше кандидатов — быстрее работает. И наоборот, больше кандидатов — лучше качество выборки на выходе.
 
-<p>The <code>distance</code> function is simple geometry:
+<p>Функция <code>distance</code> считает обычное евклидово расстояние:
 
 <pre><code>function distance(a, b) {
   var dx = a[0] - b[0],
@@ -577,19 +577,17 @@ function click() {
   return Math.sqrt(dx * dx + dy * dy);
 }</code></pre>
 
-<aside style="margin-top:-6em;">You can omit the <code>sqrt</code> here, if you want, since it’s a monotonic function and doesn’t change the determination of the best candidate.</aside>
+<aside style="margin-top:-6em;">Если хотите, то здесь вы можете опустить <code>sqrt</code>, поскольку это просто монотонная функция и на выбор наулучшего кандидата этот никак не повлияет.</aside>
 
-<p>The <code>findClosest</code> function returns the closest sample to the current candidate. This can be done by brute force, iterating over every existing sample. Or you can accelerate the search, say by <a href="http://bl.ocks.org/mbostock/9078690">using a quadtree</a>. Brute force is simple to implement but very slow (quadratic time, in <a href="http://en.wikipedia.org/wiki/Big_O_notation">O-notation</a>). The accelerated approach is much faster, but more work to implement.
+<p>Функция <code>findClosest</code> возвращает ближайший элемент выборки к текущему кандидату. Это может быть сделано грубо, просто перебором всех элементов. Или же можно ускорить поиск, например используя <a href="http://bl.ocks.org/mbostock/9078690">квадрадерево</a>. Грубый подход легок в реализации, но очень медленный (квадратичное время <a href="https://ru.wikipedia.org/wiki/%C2%ABO%C2%BB_%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B5_%D0%B8_%C2%ABo%C2%BB_%D0%BC%D0%B0%D0%BB%D0%BE%D0%B5">О-нотация</a>). Более быстрый алгоритм, наоборот, требует больше работы для реализации.
 
-<p>Speaking of trade-offs: when deciding whether to use an algorithm, we evaluate it not in a vacuum but against other approaches. And as a practical matter it is useful to weigh the complexity of implementation — how long it takes to implement, how difficult it is to maintain — against its performance and quality.
-
-<p>The simplest alternative is uniform random sampling:
+<p>Простейшая альтернатива — это равномерное случайное распределение:
 
 <pre><code class="javascript">function sample() {
   return [random() * width, random() * height];
 }</code></pre>
 
-<p>It looks like this:
+<p>Выглядит это так:
 
 <p class="animation" id="uniform-random-sampling"><script>(function() {
 
