@@ -638,13 +638,14 @@ function click() {
 
 })()</script>
 
-<aside><a href="http://bl.ocks.org/mbostock/fe3f75700e70416e37cd">Uniform random</a></aside>
+<aside><a href="http://bl.ocks.org/mbostock/fe3f75700e70416e37cd">Равномерное распределение</a></aside>
 
-<p>Uniform random is pretty terrible. There is both severe under- and oversampling: many samples are densely-packed, even overlapping, leading to large empty areas. (Uniform random sampling also represents the lower bound of quality for the best-candidate algorithm, as when the number of candidates per sample is set to one.)
+<p>Равномерно распределенные случайные элементы выглядят довольно плохо. Здесь есть как слишком плотные участки, так и слишком разреженные. (Равномерное распределение также является частным случаем алгоритма наилучшего кандидата, когда число кандидатов на каждом шага равно единице)
 
-<p>Dots patterns are one way of showing sample pattern quality, but not the only way. For example, we can attempt to simulate vision under different sampling strategies by coloring an image according to the color of the closest sample. This is, in effect, a <a href="http://en.wikipedia.org/wiki/Voronoi_diagram">Voronoi diagram</a> of the samples where each cell is colored by the associated sample.
+<p>Точки – один из способов показать качество выборки, но не единственный. Например, мы можем попробовать симулировать зрение с помощью раскрашивания какого-нибудь изображения в соответсвии с цветом ближайшего элемента выборки. Это может быть получено с помощью <a href="http://ru.wikipedia.org/wiki/%D0%94%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0_%D0%92%D0%BE%D1%80%D0%BE%D0%BD%D0%BE%D0%B3%D0%BE">диаграммы Вороного</a>, где каждая ячейка раскрашена соответсвенно ассоциированному элементу выборки.
 
-<p>What does <i>The Starry Night</i> look like through 6,667 uniform random samples?
+<p>Как выглядит <i>Звездная Ночь</i> через 6,667 равномерно распределенных точек?
+
 
 <p><img class="starry-night" src="uniform-random-starry-night.jpg" style="width:960px;height:360px;">
 
